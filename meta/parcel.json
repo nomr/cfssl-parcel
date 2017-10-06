@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "name": "HWX_REGISTRY",
+  "setActiveSymlink": true,
+
+  "depends": "CDH",
+  "replaces": "",
+  "conflicts": "",
+
+  "provides": [
+    "hwx-registry"
+  ],
+
+  "scripts": {
+    "defines": "hwx_registry_env.sh"
+  },
+
+  "packages": [
+    {
+      "name": "registry",
+      "version": "0.4.0"
+    }
+  ],
+
+  "components": [
+    {
+      "name": "registry",
+      "version": "0.4.0",
+      "pkg_version": "0.4.0"
+    }
+  ],
+
+  "users": {
+    "hwx-registry": {
+      "longname": "HortonWorks Registry",
+      "home": "/var/lib/hwx-registry",
+      "shell": "/bin/bash",
+      "extra_groups": [ ]
+    }
+  },
+
+  "groups": [
+  ]
+}
