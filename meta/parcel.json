@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "name": "HWX_REGISTRY",
+  "name": "CFSSL",
   "setActiveSymlink": true,
 
   "depends": "CDH",
@@ -8,32 +8,32 @@
   "conflicts": "",
 
   "provides": [
-    "hwx-registry"
+    "pki"
   ],
 
   "scripts": {
-    "defines": "hwx_registry_env.sh"
+    "defines": "cfssl_env.sh"
   },
 
   "packages": [
     {
-      "name": "registry",
-      "version": "0.4.0"
+      "name": "cfssl",
+      "version": "1.2.0"
     }
   ],
 
   "components": [
     {
-      "name": "registry",
-      "version": "0.4.0",
-      "pkg_version": "0.4.0"
+      "name": "cfssl",
+      "version": "1.2.0",
+      "pkg_version": "1.2.0"
     }
   ],
 
   "users": {
-    "hwx-registry": {
-      "longname": "HortonWorks Registry",
-      "home": "/var/lib/hwx-registry",
+    "cfssl": {
+      "longname": "CloudFlare's PKI Toolkit",
+      "home": "/var/lib/cfssl",
       "shell": "/bin/bash",
       "extra_groups": [ ]
     }

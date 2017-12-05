@@ -3,7 +3,7 @@ csd/images/icon.png
 
 # Release and intermediates
 release
-HWX_REGISTRY-*
+CFSSL-*
 # Remote binaries
 registry-*.tar.gz
 

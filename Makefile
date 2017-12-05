@@ -1,9 +1,10 @@
 TAG:=$(shell git describe --tags | sed -e 's/^v//')
 TAG_DIST=$(shell echo $(TAG) | sed -r -e 's/.*-([[:digit:]]+)-g.*/\1/')
 TAG_HASH=$(shell echo $(TAG) | sed -r -e 's/^.*(g[0-9a-f]+|$$)/\1/')
-PKG=HWX_REGISTRY
-PKG_VERSION=$(shell echo $(TAG) | sed -r -e 's/\+registry.*//')
+PKG=CFSSL
+PKG_VERSION=$(shell echo $(TAG) | sed -r -e 's/\+.*//')
 VERSION=$(subst +,-,$(TAG))
+GOPATH=$(PWD)/$(PKG)-$(VERSION)
 
 ifeq ($(TRAVIS), true)
   DISTROS=el7
@@ -14,7 +15,7 @@ PARCELS=$(foreach DISTRO,$(DISTROS),$(PKG)-$(VERSION)-$(DISTRO).parcel)
 
 .INTERMEDIATE: %-SHA256
 .DELETE_ON_ERROR:
-.PHONY: release
+.PHONY: release cfssl
 
 all: info release
 
@@ -45,18 +46,22 @@ $(PKG)-$(VERSION).parcel: $(PKG)-$(VERSION)/meta
 	@mkdir -p $(shell dirname $@)
 	tar zcvf $@ --owner root --group=root $(shell dirname $<)
 
-$(PKG)-$(VERSION)/meta: $(PKG)-$(VERSION) meta validator.jar 
+$(PKG)-$(VERSION)/meta: $(PKG)-$(VERSION) meta validator.jar
 	@mkdir $@
-	cp meta/hwx_registry_env.sh $@
+	cp meta/cfssl_env.sh $@
 	cat meta/parcel.json | jq ".version=\"$(VERSION)\"" > $@/parcel.json
 	java -jar validator.jar -p $@/parcel.json || (rm -rf $@ && false)
 
-$(PKG)-$(VERSION): registry-$(PKG_VERSION)
+$(PKG)-$(VERSION):
 	rm -rf $@
 	mkdir -p $@
-	mv registry-$(PKG_VERSION)/* $@
-	find $@ -type f -exec chmod 644 {} \;
-	find $@/bin -type f -exec chmod 755 {} \;
+	go get github.com/GeertJohan/go.rice/rice
+	go get -u -d github.com/cloudflare/cfssl/cmd/...
+	cd $(GOPATH)/src/github.com/cloudflare/cfssl && $(GOPATH)/bin/rice embed-go -i=./cli/serve
+	cd ../../../../..
+	go install github.com/cloudflare/cfssl/cmd/...
+	rm -rf $(GOPATH)/bin/rice $(GOPATH)/src $(GOPATH)/pkg
+
 
 # Remote dependencies
 validator.jar:
@@ -65,15 +70,6 @@ validator.jar:
 
 make_manifest.py:
 	ln tools/cm_ext/make_manifest/make_manifest.py
-
-registry-$(PKG_VERSION).tar.gz: registry-$(PKG_VERSION).tar.gz-SHA256
-	wget 'https://github.com/hortonworks/registry/releases/download/v$(PKG_VERSION)/$@' -O $@
-	touch $@
-	sha256sum -c $<
-
-registry-$(PKG_VERSION): registry-$(PKG_VERSION).tar.gz
-	tar --no-same-permission --no-same-owner -zxvf $<
-	mv hortonworks-$@-SNAPSHOT $@
 
 # Implicit rules
 %-SHA256: SHA256SUMS
