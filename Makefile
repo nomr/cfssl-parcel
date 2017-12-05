@@ -55,6 +55,7 @@ $(PKG)-$(VERSION)/meta: $(PKG)-$(VERSION) meta validator.jar
 $(PKG)-$(VERSION):
 	rm -rf $@
 	mkdir -p $@
+	cp -avf xslt $@/xslt
 	go get github.com/GeertJohan/go.rice/rice
 	go get -u -d github.com/cloudflare/cfssl/cmd/...
 	cd $(GOPATH)/src/github.com/cloudflare/cfssl && $(GOPATH)/bin/rice embed-go -i=./cli/serve
