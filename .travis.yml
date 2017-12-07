@@ -1,6 +1,7 @@
 language: java
 install: true
 script:
+- eval "$(gimme 1.9)"
 - make
 deploy:
   provider: releases
