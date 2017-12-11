@@ -1,0 +1,56 @@
+{
+  "cfssl": {
+    "destination": "/usr/bin/cfssl",
+    "source": "bin/cfssl",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "cfssl-bundle": {
+    "destination": "/usr/bin/cfssl-bundle",
+    "source": "bin/cfssl-bundle",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "cfssl-certinfo": {
+    "destination": "/usr/bin/cfssl-certinfo",
+    "source": "bin/cfssl-certinfo",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "cfssl-newkey": {
+    "destination": "/usr/bin/cfssl-newkey",
+    "source": "bin/cfssl-newkey",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "cfssl-scan": {
+    "destination": "/usr/bin/cfssl-scan",
+    "source": "bin/cfssl-scan",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "cfssljson": {
+    "destination": "/usr/bin/cfssljson",
+    "source": "bin/cfssljson",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "jq": {
+    "destination": "/usr/bin/jq",
+    "source": "bin/jq",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "mkbundle": {
+    "destination": "/usr/bin/mkbundle",
+    "source": "bin/mkbundle",
+    "priority": 10,
+    "isDirectory": false
+  },
+  "multirootca": {
+    "destination": "/usr/bin/multirootca",
+    "source": "bin/multirootca",
+    "priority": 10,
+    "isDirectory": false
+  }
+}

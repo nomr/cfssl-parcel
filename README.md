@@ -1,7 +1,7 @@
-# cfssl-parcel
-cfssl-parcel is a CDH5.x parcel for CloudFlare's Toolkit.
+# pki-parcel
+pki-parcel is a CDH5.x parcel for CloudFlare's PKI Toolkit.
 
-[![Build Status](https://travis-ci.org/nomr/cfssl-parcel.svg?branch=master)](https://travis-ci.org/nomr/cfssl-parcel)
+[![Build Status](https://travis-ci.org/nomr/pki-parcel.svg?branch=master)](https://travis-ci.org/nomr/pki-parcel)
 
 ## Requirements 
   - jq

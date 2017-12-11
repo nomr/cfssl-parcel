@@ -3,7 +3,7 @@ csd/images/icon.png
 
 # Release and intermediates
 release
-CFSSL-*
+PKI-*
 # Remote binaries
 registry-*.tar.gz
 

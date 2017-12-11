@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "name": "CFSSL",
+  "name": "PKI",
   "setActiveSymlink": true,
 
   "depends": "CDH",
-  "replaces": "",
+  "replaces": "CFSSL",
   "conflicts": "",
 
   "provides": [
@@ -12,28 +12,37 @@
   ],
 
   "scripts": {
-    "defines": "cfssl_env.sh"
+    "defines": "pki_env.sh"
   },
 
   "packages": [
     {
       "name": "cfssl",
       "version": "1.2.0"
+    },
+    {
+      "name": "jq",
+      "version": "1.5"
     }
-  ],
+   ],
 
   "components": [
     {
       "name": "cfssl",
       "version": "1.2.0",
       "pkg_version": "1.2.0"
+    },
+    {
+      "name": "jq",
+      "version": "1.5",
+      "pkg_version": "1.5"
     }
   ],
 
   "users": {
-    "cfssl": {
+    "cloudera-pki": {
       "longname": "CloudFlare's PKI Toolkit",
-      "home": "/var/lib/cfssl",
+      "home": "/var/lib/cloudera-pki",
       "shell": "/bin/bash",
       "extra_groups": [ ]
     }
